@@ -7,11 +7,11 @@ resources:
 namePrefix: ""
 nameSuffix: ""
 
-patches:
-  - path: iam-role.yml
-    target:
-      kind: NodeClass
-      name: nodeclass-system
+# patches:
+#   - path: iam-role.yml
+#     target:
+#       kind: NodeClass
+#       name: nodeclass-system
 
   # - path: iam-role.yml
   #   target:
