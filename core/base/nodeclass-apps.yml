@@ -12,7 +12,7 @@ spec:
   subnetSelectorTerms:
     - tags:
         Name: "public"
-        kubernetes.io/role/internal-elb: "1"
+        # kubernetes.io/role/internal-elb: "1"
     # Alternative using direct subnet ID
     # - id: "subnet-0123456789abcdef0"
 
