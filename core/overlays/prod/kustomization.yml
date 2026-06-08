@@ -1,2 +1,6 @@
 resources:
-  - ../../
+  - ../../alb-ingressclass.yml
+  - ../../nodeclass-apps.yml
+  - ../../nodeclass-system.yml
+  - ../../nodepool-apps.yml
+  - ../../nodepool-system.yml
