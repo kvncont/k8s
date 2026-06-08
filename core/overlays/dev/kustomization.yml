@@ -13,7 +13,7 @@ patches:
       kind: NodeClass
       name: nodeclass-system
 
-  - path: iam-role.yml
-    target:
-      kind: NodeClass
-      name: nodeclass-apps
+  # - path: iam-role.yml
+  #   target:
+  #     kind: NodeClass
+  #     name: nodeclass-apps
