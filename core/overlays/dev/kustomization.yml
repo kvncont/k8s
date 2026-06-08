@@ -7,8 +7,13 @@ resources:
 namePrefix: ""
 nameSuffix: ""
 
-# patches:
-#   - path: replicas-patch.yaml
-#     target:
-#       kind: Deployment
-#       name: grade-submission-api
+patches:
+  - path: iam-role.yml
+    target:
+      kind: NodeClass
+      name: nodeclass-system
+
+  - path: iam-role.yml
+    target:
+      kind: NodeClass
+      name: nodeclass-apps
