@@ -4,7 +4,10 @@ metadata:
   name: nodeclass-system
 spec:
   role: iam-rol-auto-mode-eks-node-svc
+  subnetSelectorTerms:
+    - tags:
+        kubernetes.io/subnet: "public"
   securityGroupSelectorTerms:
-    # - tags:
-    #     Name: secgrp-auto-mode-shared-node
-    - id: sg-0c46c4ab208bfc0bf
+    - tags:
+        Name: secgrp-auto-mode-shared-node
+    # - id: sg-0c46c4ab208bfc0bf
