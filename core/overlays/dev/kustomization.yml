@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ../../base
 
-# namePrefix: dev-
-# nameSuffix: ""
+namePrefix: ""
+nameSuffix: ""
 
 # patches:
 #   - path: replicas-patch.yaml
