@@ -4,16 +4,13 @@ kind: Kustomization
 resources:
   - ../../base
 
-namePrefix: ""
-nameSuffix: ""
+patches:
+  - path: nodeclass-system-patch.yml
+    target:
+      kind: NodeClass
+      name: nodeclass-system
 
-# patches:
-#   - path: iam-role.yml
-#     target:
-#       kind: NodeClass
-#       name: nodeclass-system
-
-  # - path: iam-role.yml
-  #   target:
-  #     kind: NodeClass
-  #     name: nodeclass-apps
+  - path: nodeclass-apps-patch.yml
+    target:
+      kind: NodeClass
+      name: nodeclass-apps

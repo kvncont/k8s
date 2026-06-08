@@ -1,0 +1,9 @@
+apiVersion: eks.amazonaws.com/v1
+kind: NodeClass
+metadata:
+  name: nodeclass-system
+spec:
+  role: iam-rol-auto-mode-eks-node-svc
+  securityGroupSelectorTerms:
+    - tags:
+        Name: secgrp-auto-mode-shared-node
