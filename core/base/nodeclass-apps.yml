@@ -6,7 +6,7 @@ spec:
   # Required fields
 
   # role and instanceProfile are mutually exclusive fields.
-  role: MyNodeRole  # IAM role for EC2 instances
+  role: iam-rol-auto-mode-eks-node-svc  # IAM role for EC2 instances
   # instanceProfile: eks-MyNodeInstanceProfile  # IAM instance-profile for EC2 instances
 
   subnetSelectorTerms:
