@@ -5,5 +5,6 @@ metadata:
 spec:
   role: iam-rol-auto-mode-eks-node-svc
   securityGroupSelectorTerms:
-    - tags:
-        Name: secgrp-auto-mode-shared-node
+    # - tags:
+    #     Name: secgrp-auto-mode-shared-node
+    - id: sg-0c46c4ab208bfc0bf
