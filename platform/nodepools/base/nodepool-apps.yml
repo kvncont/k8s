@@ -1,0 +1,34 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: nodepool-apps
+spec:
+  template:
+    metadata:
+      labels:
+        billing-team: my-team
+    spec:
+      nodeClassRef:
+        group: eks.amazonaws.com
+        kind: NodeClass
+        name: nodeclass-apps
+
+      requirements:
+        - key: "eks.amazonaws.com/instance-category"
+          operator: In
+          values: ["c", "m", "r"]
+        - key: "eks.amazonaws.com/instance-cpu"
+          operator: In
+          values: ["4", "8"]
+        - key: "topology.kubernetes.io/zone"
+          operator: In
+          values: ["us-east-1a", "us-east-1b", "us-east-1c"]
+        - key: "kubernetes.io/arch"
+          operator: In
+          values: ["arm64"]
+
+  limits:
+    cpu: "50"
+    memory: 64Gi
+    pods: "110"
+    nodes: "3"

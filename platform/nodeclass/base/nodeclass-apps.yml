@@ -1,0 +1,118 @@
+apiVersion: eks.amazonaws.com/v1
+kind: NodeClass
+metadata:
+  name: nodeclass-apps
+spec:
+  # Required fields
+
+  # role and instanceProfile are mutually exclusive fields.
+  role: MyNodeRole  # IAM role for EC2 instances
+  # instanceProfile: eks-MyNodeInstanceProfile  # IAM instance-profile for EC2 instances
+
+  subnetSelectorTerms:
+    - tags:
+        Name: "public"
+        kubernetes.io/role/internal-elb: "1"
+    # Alternative using direct subnet ID
+    # - id: "subnet-0123456789abcdef0"
+
+  securityGroupSelectorTerms:
+    - tags:
+        Name: "eks-cluster-sg"
+    # Alternative approaches:
+    # - id: "sg-0123456789abcdef0"
+    # - name: "eks-cluster-security-group"
+
+  # Optional: Pod subnet selector for advanced networking
+  # podSubnetSelectorTerms:
+  #   - tags:
+  #       Name: "pod-subnet"
+  #       kubernetes.io/role/pod: "1"
+    # Alternative using direct subnet ID
+    # - id: "subnet-0987654321fedcba0"
+  # must include Pod security group selector also
+  # podSecurityGroupSelectorTerms:
+  #   - tags:
+  #       Name: "eks-pod-sg"
+    # Alternative using direct security group ID
+    # - id: "sg-0123456789abcdef0"
+
+  # Optional: Selects on-demand capacity reservations and capacity blocks
+  # for EKS Auto Mode to prioritize.
+  # capacityReservationSelectorTerms:
+  #   - id: cr-56fac701cc1951b03
+  #   # Alternative Approaches
+  #   - tags:
+  #       Name: "targeted-odcr"
+  #     # Optional owning account ID filter
+  #     owner: "012345678901"
+
+  # Optional fields
+  # snatPolicy: Random  # or Disabled
+
+  # networkPolicy: DefaultAllow  # or DefaultDeny
+  # networkPolicyEventLogs: Disabled  # or Enabled
+
+  ephemeralStorage:
+    size: "30Gi"    # Range: 1-59000Gi or 1-64000G or 1-58Ti or 1-64T
+    iops: 3000      # Range: 3000-16000
+    throughput: 125 # Range: 125-1000
+    # Optional KMS key for encryption
+    # kmsKeyID: "arn:aws:kms:region:account:key/key-id"
+    # Accepted formats:
+    # KMS Key ID
+    # KMS Key ARN
+    # Key Alias Name
+    # Key Alias ARN
+
+  # advancedNetworking:
+  #   # Optional: Controls whether public IP addresses are assigned to instances that are launched with the nodeclass.
+  #   # If not set, defaults to the MapPublicIpOnLaunch setting on the subnet.
+  #   associatePublicIPAddress: false
+
+  #   # Optional: Forward proxy, commonly requires certificateBundles as well
+  #   # for EC2, see https://repost.aws/knowledge-center/eks-http-proxy-containerd-automation
+  #   httpsProxy: http://192.0.2.4:3128 #commonly port 3128 (Squid) or 8080 (NGINX) #Max 255 characters
+  #   #httpsProxy: http://[2001:db8::4]:3128 # IPv6 address with port, use []
+  #   noProxy: #Max 50 entries
+  #       - localhost #Max 255 characters each
+  #       - 127.0.0.1
+  #       #- ::1 # IPv6 localhost
+  #       #- 0:0:0:0:0:0:0:1 # IPv6 localhost
+  #       - 169.254.169.254 # EC2 Instance Metadata Service
+  #       #- [fd00:ec2::254] # IPv6 EC2 Instance Metadata Service
+  #       # Domains to exclude, put all VPC endpoints here
+  #       - .internal
+  #       - .eks.amazonaws.com
+  #   # ipv4PrefixSize is default to Auto which is prefix and fallback to secondary IP. "32" is the secondary IP mode.
+  #   ipv4PrefixSize: Auto # or "32"
+
+  #   # enableV4Egress is default to true. Setting it to false when using network policy or blocking IPv4 traffic in IPv6 clusters
+  #   enableV4Egress: false
+
+  # advancedSecurity:
+  #   # Optional, US regions only: Specifying `fips: true` will cause nodes in the nodeclass to run FIPS compatible AMIs.
+  #   fips: false
+
+  # Optional: Custom certificate bundles.
+  # certificateBundles:
+  #   - name: "custom-cert"
+  #     data: "base64-encoded-cert-data"
+
+  # Optional: EC2 Placement Group
+  # placementGroupSelector:
+  #   name: "targeted-pg"
+    # Alternative use direct placement group ID
+    # id: "pg-02465754522cda020"
+
+  # Optional: Additional EC2 tags (with restrictions)
+  tags:
+    Environment: "development"
+    Team: "platform"
+    # Note: Cannot use restricted tags like:
+    # - kubernetes.io/cluster/*
+    # - karpenter.sh/provisioner-name
+    # - karpenter.sh/nodepool
+    # - karpenter.sh/nodeclaim
+    # - karpenter.sh/managed-by
+    # - eks.amazonaws.com/nodeclass

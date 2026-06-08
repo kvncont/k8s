@@ -1,0 +1,3 @@
+resources:
+  - nodepool-apps.yml
+  - nodepool-system.yml

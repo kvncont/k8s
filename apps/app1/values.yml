@@ -1,0 +1,5 @@
+# Common values for app1 between all environments
+fullnameOverride: "app-01"
+image:
+  repository: nginx
+  tag: latest
