@@ -7,3 +7,6 @@ resources:
   - nodeclass-system.yml
   - nodepool-apps.yml
   - nodepool-system.yml
+  - strorageclass.yml
+  - pv.yml
+  - pvc.yml

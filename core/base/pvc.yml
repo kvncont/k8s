@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 5Gi
+
+# Esta PVC queda enlazada al PV estático anterior.
+# Si prefieres usar un PVC dinámico, elimina el PV y usa solo la StorageClass.
