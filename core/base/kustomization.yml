@@ -7,3 +7,5 @@ resources:
   - nodeclass-system.yml
   - nodepool-apps.yml
   - nodepool-system.yml
+  - storageclass-s3.yml
+  - storageclass-efs.yml
