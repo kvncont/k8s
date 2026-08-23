@@ -5,6 +5,6 @@ image:
   tag: latest
 persistence:
   enabled: true
-  storageClass: s3files-sc
+  storageClassName: s3files-sc
   size: 1Gi
   mountPath: /usr/share/nginx/html
