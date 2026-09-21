@@ -22,8 +22,8 @@ spec:
         repoURL: https://github.com/kvncont/k8s
         targetRevision: refactor/structure
         path: dev/bootstrap/projects
-        directory:
-          include: "projects-{{path.basename}}"
+        # directory:
+        #   include: "projects-{{path.basename}}"
       destination:
         server: '{{server}}'
         namespace: argocd
