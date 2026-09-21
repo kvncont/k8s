@@ -19,7 +19,7 @@ spec:
                 - path: "dev/workloads/*.yml"
   template:
     metadata:
-      name: "{{name}}-{{path.basenameNormalized}}"
+      name: "{{name}}-{{path.filenameNormalized}}"
     spec:
       project: backends
       sources:
