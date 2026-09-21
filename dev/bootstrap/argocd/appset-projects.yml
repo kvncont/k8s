@@ -21,7 +21,7 @@ spec:
       source:
         repoURL: https://github.com/kvncont/k8s
         targetRevision: refactor/structure
-        path: dev/bootstrap/projects
+        path: dev/projects
         # directory:
         #   include: "projects-{{path.basename}}"
       destination:
