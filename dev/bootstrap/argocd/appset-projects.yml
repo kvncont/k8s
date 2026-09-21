@@ -15,7 +15,7 @@ spec:
                 - path: "dev/bootstrap/argocd/projects-*.yml"
   template:
     metadata:
-      name: "{{path.basenameNormalized}}"
+      name: "{{name}}-{{path.basenameNormalized}}"
     spec:
       project: default
       source:
