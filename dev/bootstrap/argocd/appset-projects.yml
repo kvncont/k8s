@@ -5,9 +5,9 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        generators:
-          - clusters: {}
+    # - matrix:
+    #     generators:
+    - clusters: {}
           # - git:
           #     repoURL: https://github.com/kvncont/k8s
           #     revision: refactor/structure
