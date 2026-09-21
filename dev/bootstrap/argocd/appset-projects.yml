@@ -12,10 +12,10 @@ spec:
               repoURL: https://github.com/kvncont/k8s
               revision: refactor/structure
               files:
-                - path: "dev/bootstrap/argocd/projects-*.yml"
+                - path: "dev/projects/projects-*.yml"
   template:
     metadata:
-      name: "{{name}}-{{path.basenameNormalized}}"
+      name: "{{name}}-{{path.filenameNormalized}}"
     spec:
       project: default
       source:
