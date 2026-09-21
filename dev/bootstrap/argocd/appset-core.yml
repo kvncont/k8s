@@ -21,8 +21,15 @@ spec:
         repoURL: https://github.com/kvncont/k8s
         targetRevision: refactor/structure
         path: dev/core
-        directory:
-          recurse: true
+        kustomize:
+          patches:
+            - target:
+                kind: StorageClass
+                name: s3files-sc
+              patch: |-
+                - op: replace
+                  path: /parameters/fileSystemId
+                  value: "{{ .metadata.labels.s3-filesystem-id }}"
       destination:
         server: "{{.server}}"
         namespace: kube-system

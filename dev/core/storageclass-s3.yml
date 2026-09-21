@@ -5,7 +5,7 @@ metadata:
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: s3files-ap
-  fileSystemId: "{{.metadata.labels.s3-filesystem-id}}"
+  fileSystemId: "REPLACE_BY_APPLICATIONSET" # sobrescrito por el patch de kustomize en el ApplicationSet
   directoryPerms: "700"
   # gidRangeStart: "1000" # optional
   # gidRangeEnd: "2000" # optional
