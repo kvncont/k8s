@@ -11,21 +11,19 @@ spec:
           - git:
               repoURL: https://github.com/kvncont/k8s
               revision: refactor/structure
-              files:
-                - path: "dev/projects/projects-*.yml"
+              directories:
+                - path: dev/projects/*
   template:
     metadata:
-      name: "{{name}}-{{path.filenameNormalized}}"
+      name: "{{name}}-{{path.basenameNormalized}}"
     spec:
       project: default
       source:
         repoURL: https://github.com/kvncont/k8s
         targetRevision: refactor/structure
-        path: dev/projects
-        # directory:
-        #   include: "projects-{{path.basename}}"
+        path: "{{path}}"
       destination:
-        server: '{{server}}'
+        server: "{{server}}"
         namespace: argocd
       syncPolicy:
           automated:
