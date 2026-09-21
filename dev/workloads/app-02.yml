@@ -1,0 +1,5 @@
+fullnameOverride: "app-02"
+image:
+  repository: nginx
+  tag: latest
+replicaCount: 2

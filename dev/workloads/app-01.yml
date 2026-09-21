@@ -1,0 +1,10 @@
+fullnameOverride: "app-01"
+image:
+  repository: nginx
+  tag: latest
+replicaCount: 2
+persistence:
+  enabled: true
+  storageClassName: s3files-sc
+  size: 1Gi
+  mountPath: /usr/share/nginx/html
