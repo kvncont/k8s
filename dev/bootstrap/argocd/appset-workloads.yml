@@ -28,7 +28,7 @@ spec:
           path: .
           helm:
             valueFiles:
-              - $values/dev/workloads/{{path.basename}}
+              - $values/dev/workloads/{{path.filename}}
         - repoURL: https://github.com/kvncont/k8s
           targetRevision: refactor/structure
           ref: values
