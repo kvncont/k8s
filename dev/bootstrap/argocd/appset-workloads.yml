@@ -5,18 +5,23 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        generators:
-          - clusters:
-              # Excluye el clúster implícito "in-cluster" para no duplicar la Application
-              selector:
-                matchLabels:
-                  argocd.argoproj.io/secret-type: cluster
-          - git:
-              repoURL: https://github.com/kvncont/k8s
-              revision: refactor/structure
-              files:
-                - path: "dev/workloads/*.yml"
+    - clusters:
+        # Excluye el clúster implícito "in-cluster" para no duplicar la Application
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+    # - matrix:
+    #     generators:
+    #       - clusters:
+    #           # Excluye el clúster implícito "in-cluster" para no duplicar la Application
+    #           selector:
+    #             matchLabels:
+    #               argocd.argoproj.io/secret-type: cluster
+    #       - git:
+    #           repoURL: https://github.com/kvncont/k8s
+    #           revision: refactor/structure
+    #           files:
+    #             - path: "dev/workloads/*.yml"
   template:
     metadata:
       name: "{{name}}-{{path.basenameNormalized}}"
