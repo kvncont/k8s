@@ -7,7 +7,11 @@ spec:
   generators:
     - matrix:
         generators:
-          - clusters: {}
+          - clusters:
+            # Excluye el clúster implícito "in-cluster" para no duplicar la Application
+            selector:
+              matchLabels:
+                argocd.argoproj.io/secret-type: cluster
           - git:
               repoURL: https://github.com/kvncont/k8s
               revision: refactor/structure
@@ -19,7 +23,7 @@ spec:
     spec:
       project: backends
       sources:
-        - repoURL: https://github.com/kvncont/helm-chart
+        - repoURL: https://github.com/kvncont/helm-charts
           targetRevision: main
           path: .
           helm:
