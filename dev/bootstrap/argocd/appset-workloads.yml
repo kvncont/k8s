@@ -7,11 +7,7 @@ spec:
   generators:
     - matrix:
         generators:
-          - clusters:
-              # Excluye el clúster implícito "in-cluster" para no duplicar la Application
-              selector:
-                matchLabels:
-                  argocd.argoproj.io/secret-type: cluster
+          - clusters: {}
           - git:
               repoURL: https://github.com/kvncont/k8s
               revision: refactor/structure
@@ -28,13 +24,13 @@ spec:
           path: .
           helm:
             valueFiles:
-              - $values/dev/workloads
+              - $values/dev/workloads/{{path.basename}}
         - repoURL: https://github.com/kvncont/k8s
           targetRevision: refactor/structure
           ref: values
       destination:
         server: "{{server}}"
-        namespace: workloads
+        namespace: backends
       syncPolicy:
         # automated:
         #   prune: true
