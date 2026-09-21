@@ -4,6 +4,8 @@ metadata:
   name: workloads
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - matrix:
         generators:
@@ -19,7 +21,7 @@ spec:
                 - path: "dev/workloads/*.yml"
   template:
     metadata:
-      name: "{{name}}-{{path.filenameNormalized}}"
+      name: "{{.name}}-{{ trimSuffix \".yml\" .path.filename }}"
     spec:
       project: backends
       sources:
@@ -28,12 +30,12 @@ spec:
           path: .
           helm:
             valueFiles:
-              - $values/dev/workloads/{{path.filename}}
+              - $values/dev/workloads/{{.path.filename}}
         - repoURL: https://github.com/kvncont/k8s
           targetRevision: refactor/structure
           ref: values
       destination:
-        server: "{{server}}"
+        server: "{{.server}}"
         namespace: backends
       syncPolicy:
         automated:
