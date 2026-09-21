@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  generators:
+    - matrix:
+        generators:
+          - clusters:
+              # Excluye el clúster implícito "in-cluster" para no duplicar la Application
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: cluster
+          - git:
+              repoURL: https://github.com/kvncont/k8s
+              revision: refactor/structure
+              files:
+                - path: "dev/workloads/*.yml"
+  template:
+    metadata:
+      name: "{{name}}-{{path.basenameNormalized}}"
+    spec:
+      project: backends
+      sources:
+        - repoURL: https://github.com/kvncont/helm-chart
+          targetRevision: main
+          path: .
+          helm:
+            valueFiles:
+              - $values/dev/workloads/{{path.basename}}
+        - repoURL: https://github.com/kvncont/k8s
+          targetRevision: refactor/structure
+          ref: values
+      destination:
+        server: "{{server}}"
+        namespace: workloads
+      syncPolicy:
+        # automated:
+        #   prune: true
+        #   selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
