@@ -15,15 +15,15 @@ spec:
           #       - path: "dev/projects/projects-*.yml"
   template:
     metadata:
-      name: "{{name}}-{{path.basenameNormalized}}"
+      name: "{{name}}-projects"
     spec:
       project: default
       source:
         repoURL: https://github.com/kvncont/k8s
         targetRevision: refactor/structure
         path: dev/projects
-        directory:
-          include: "{{path.basename}}"
+        # directory:
+        #   include: "{{path.basename}}"
       destination:
         server: "{{server}}"
         namespace: argocd
