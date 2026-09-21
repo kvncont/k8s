@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: projects
+  namespace: argocd
+spec:
+  generators:
+    - matrix:
+        generators:
+          - clusters: {}
+          - git:
+              repoURL: https://github.com/kvncont/k8s
+              revision: refactor/structure
+              files:
+                - path: "dev/bootstrap/argocd/projects-*.yml"
+  template:
+    metadata:
+      name: "{{path.basenameNormalized}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/kvncont/k8s
+        targetRevision: refactor/structure
+        path: dev/bootstrap/argocd
+        directory:
+          include: "{{path.basename}}"
+      destination:
+        server: '{{server}}'
+        namespace: argocd
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
