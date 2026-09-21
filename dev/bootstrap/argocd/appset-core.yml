@@ -29,7 +29,7 @@ spec:
               patch: |-
                 - op: replace
                   path: /parameters/fileSystemId
-                  value: "test"
+                  value: "{{.metadata.labels.s3-filesystem-id}}"
       destination:
         server: "{{.server}}"
         namespace: kube-system
